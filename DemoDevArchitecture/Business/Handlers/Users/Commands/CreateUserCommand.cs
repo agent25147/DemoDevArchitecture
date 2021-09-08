@@ -8,6 +8,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.EntityFramework.Contexts;
+using DataAccess.Constants;
 using MediatR;
 using System;
 using System.Text.Json.Serialization;
@@ -77,7 +78,7 @@ namespace Business.Handlers.Users.Commands
              
                 if (request.IsSetra)
                 {
-                    _userRepository.UseDb(MultiContextOptions.Setra);
+                    _userRepository.UseDb(SiteNames.Setra);
                     _userRepository.Add(user);
 
                     user.UserId = 0;
@@ -85,22 +86,27 @@ namespace Business.Handlers.Users.Commands
                 }
                 if (request.IsUltra)
                 {
-                    _userRepository.UseDb(MultiContextOptions.Ultra);
+                    _userRepository.UseDb(SiteNames.Ultra);
                     _userRepository.Add(user);
 
                     user.UserId = 0;
                     await _userRepository.SaveChangesAsync();
                 }
-
                 if (request.IsBetkolik)
                 {
-                    _userRepository.UseDb(MultiContextOptions.Betkolik);
+                    _userRepository.UseDb(SiteNames.Betkolik);
                     _userRepository.Add(user);
 
                     user.UserId = 0;
                     await _userRepository.SaveChangesAsync();
                 }
 
+                // user is not admin and haven't selected any checkboxes
+                if(!request.IsSetra && !request.IsSetra && !request.IsBetkolik)
+                {
+                    _userRepository.Add(user);
+                    await _userRepository.SaveChangesAsync();
+                }
 
                 return new SuccessResult(Messages.Added);
             }

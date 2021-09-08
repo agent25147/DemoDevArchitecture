@@ -3,6 +3,7 @@ using Core.Entities.Concrete;
 using Core.Entities.Dtos;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.Contexts;
+using DataAccess.Services.SiteSelection.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,10 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class LanguageRepository : EfEntityRepositoryBase<Language, ProjectDbContext>, ILanguageRepository
     {
-        public LanguageRepository(ProjectDbContext context)
+        public LanguageRepository(ProjectDbContext context , ISiteSelector siteSelector)
             : base(context)
         {
+            base.SetContext(siteSelector.GetCurrentContext());
         }
 
         public async Task<List<SelectionItem>> GetLanguagesLookUp()

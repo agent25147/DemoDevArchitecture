@@ -7,6 +7,7 @@ using Core.Utilities.Results;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.Jwt;
 using DataAccess.Abstract;
+using DataAccess.Constants;
 using MediatR;
 using System.Linq;
 using System.Threading;
@@ -50,8 +51,24 @@ namespace Business.Handlers.Authorizations.Queries
 
                 var claims = _userRepository.GetClaims(user.UserId);
 
+               
+
                 var accessToken = _tokenHelper.CreateToken<DArchToken>(user);
                 accessToken.Claims = claims.Select(x => x.Name).ToList();
+
+                // site access data
+                if (user.IsBetkolik)
+                {
+                    accessToken.SiteAccess.Add(SiteNames.Betkolik);
+                }
+                if (user.IsSetra)
+                {
+                    accessToken.SiteAccess.Add(SiteNames.Setra);
+                }
+                if (user.IsUltra)
+                {
+                    accessToken.SiteAccess.Add(SiteNames.Ultra);
+                }
 
                 _cacheManager.Add($"{CacheKeys.UserIdForClaim}={user.UserId}", claims.Select(x => x.Name));
 

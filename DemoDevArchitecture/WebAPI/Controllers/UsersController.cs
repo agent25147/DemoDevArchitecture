@@ -27,6 +27,7 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public async Task<IActionResult> GetList()
         {
+           
             var result = await Mediator.Send(new GetUsersQuery());
             if (result.Success)
             {

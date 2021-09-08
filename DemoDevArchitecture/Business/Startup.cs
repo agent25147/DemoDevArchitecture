@@ -3,6 +3,7 @@ using Business.Constants;
 using Business.DependencyResolvers;
 using Business.Fakes.DArch;
 using Business.Services.Authentication;
+
 using Core.CrossCuttingConcerns.Caching;
 using Core.CrossCuttingConcerns.Caching.Microsoft;
 using Core.DependencyResolvers;
@@ -15,6 +16,8 @@ using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.EntityFramework.Contexts;
 using DataAccess.Concrete.MongoDb.Context;
+using DataAccess.Services.SiteSelection;
+using DataAccess.Services.SiteSelection.Interfaces;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -83,6 +86,9 @@ namespace Business
                 return memberInfo.GetCustomAttribute<System.ComponentModel.DataAnnotations.DisplayAttribute>()
                     ?.GetName();
             };
+
+
+            services.AddSingleton<ISiteSelector, SiteSelector>();
         }
 
         /// <summary>
@@ -132,7 +138,7 @@ namespace Business
            // services.AddDbContext<ProjectDbContext>();
 
             // we are not going to use the default one
-            services.AddDbContext<ProjectDbContext, MsDbContext>();
+            services.AddDbContext<ProjectDbContext, MsDbContext_Setra>();
 
             // we will use these 3
             services.AddDbContext<MsDbContext_Setra>();

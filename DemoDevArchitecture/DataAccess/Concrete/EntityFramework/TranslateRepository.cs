@@ -3,6 +3,7 @@ using Core.Entities.Concrete;
 using Core.Entities.Dtos;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.Contexts;
+using DataAccess.Services.SiteSelection.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -13,9 +14,10 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class TranslateRepository : EfEntityRepositoryBase<Translate, ProjectDbContext>, ITranslateRepository
     {
-        public TranslateRepository(ProjectDbContext context)
+        public TranslateRepository(ProjectDbContext context , ISiteSelector siteSelector)
             : base(context)
         {
+            base.SetContext(siteSelector.GetCurrentContext());
         }
 
         public async Task<List<TranslateDto>> GetTranslateDto()

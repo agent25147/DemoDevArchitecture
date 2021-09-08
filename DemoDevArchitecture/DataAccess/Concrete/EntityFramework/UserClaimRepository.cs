@@ -3,6 +3,7 @@ using Core.Entities.Concrete;
 using Core.Entities.Dtos;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.Contexts;
+using DataAccess.Services.SiteSelection.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,13 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class UserClaimRepository : EfEntityRepositoryBase<UserClaim, ProjectDbContext>, IUserClaimRepository
     {
-        public UserClaimRepository(ProjectDbContext context)
+        private readonly ISiteSelector siteSelector;
+
+        public UserClaimRepository(ProjectDbContext context , ISiteSelector siteSelector)
             : base(context)
         {
+            base.SetContext(siteSelector.GetCurrentContext());
+            this.siteSelector = siteSelector;
         }
 
         public async Task<IEnumerable<UserClaim>> BulkInsert(int userId, IEnumerable<UserClaim> userClaims)

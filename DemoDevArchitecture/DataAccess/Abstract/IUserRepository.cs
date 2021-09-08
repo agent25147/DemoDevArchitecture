@@ -9,8 +9,7 @@ namespace DataAccess.Abstract
     {
         List<OperationClaim> GetClaims(int userId);
 
-        void UseDb(MultiContextOptions options);
-
+        void UseDb(string siteName);
     }
 
 

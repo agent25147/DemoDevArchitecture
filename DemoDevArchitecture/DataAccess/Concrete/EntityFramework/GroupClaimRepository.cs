@@ -3,6 +3,7 @@ using Core.Entities.Concrete;
 using Core.Entities.Dtos;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.Contexts;
+using DataAccess.Services.SiteSelection.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,10 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class GroupClaimRepository : EfEntityRepositoryBase<GroupClaim, ProjectDbContext>, IGroupClaimRepository
     {
-        public GroupClaimRepository(ProjectDbContext context)
+        public GroupClaimRepository(ProjectDbContext context , ISiteSelector siteSelector)
             : base(context)
         {
+            base.SetContext(siteSelector.GetCurrentContext());
         }
 
         public async Task BulkInsert(int groupId, IEnumerable<GroupClaim> groupClaims)

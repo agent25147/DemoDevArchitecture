@@ -3,6 +3,7 @@ using Core.Entities.Concrete;
 using Core.Entities.Dtos;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.Contexts;
+using DataAccess.Services.SiteSelection.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,14 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class UserGroupRepository : EfEntityRepositoryBase<UserGroup, ProjectDbContext>, IUserGroupRepository
     {
-        public UserGroupRepository(ProjectDbContext context)
+        private readonly ISiteSelector siteSelector;
+
+        public UserGroupRepository(ProjectDbContext context , ISiteSelector siteSelector)
             : base(context)
         {
+            this.siteSelector = siteSelector;
+
+            base.SetContext(siteSelector.GetCurrentContext());
         }
 
         public async Task BulkInsert(int userId, IEnumerable<UserGroup> userGroups)

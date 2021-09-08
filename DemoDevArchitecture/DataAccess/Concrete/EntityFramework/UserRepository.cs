@@ -2,6 +2,7 @@ using Core.DataAccess.EntityFramework;
 using Core.Entities.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.Contexts;
+using DataAccess.Services.SiteSelection.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,20 +11,26 @@ namespace DataAccess.Concrete.EntityFramework
     public class UserRepository : EfEntityRepositoryBase<User, ProjectDbContext>, IUserRepository
     {
         private readonly MsDbContext_Setra setraContext;
-        private readonly MsDbContext_Ultra tetraContext;
+        private readonly MsDbContext_Ultra ultraContext;
         private readonly MsDbContext_Betkolik betkolikContext;
-       
+        private readonly ISiteSelector siteSelector;
+
         public UserRepository(
             ProjectDbContext context,
             MsDbContext_Setra setraContext ,
-            MsDbContext_Ultra tetraContext , 
-            MsDbContext_Betkolik betkolikContext
+            MsDbContext_Ultra ultraContext , 
+            MsDbContext_Betkolik betkolikContext,
+            ISiteSelector siteSelector
+
            )
             : base(context)
         {
             this.setraContext = setraContext;
-            this.tetraContext = tetraContext;
+            this.ultraContext = ultraContext;
             this.betkolikContext = betkolikContext;
+            this.siteSelector = siteSelector;
+
+            base.SetContext(siteSelector.GetCurrentContext());
 
         }
 
@@ -51,21 +58,19 @@ namespace DataAccess.Concrete.EntityFramework
                     .ToList();
         }
 
-        public void UseDb(MultiContextOptions options)
+        public void UseDb(string siteName)
         {
-            switch (options)
+            if (siteName == Constants.SiteNames.Setra)
             {
-                case MultiContextOptions.Setra:
-                    base.SetContext(setraContext);
-                    break;
-                case MultiContextOptions.Ultra:
-                    base.SetContext(tetraContext);
-                    break;
-                case MultiContextOptions.Betkolik:
-                    base.SetContext(betkolikContext);
-                    break;
-                default:
-                    break;
+                base.SetContext(setraContext);
+            }
+            else if (siteName == Constants.SiteNames.Ultra)
+            {
+                base.SetContext(ultraContext);
+            }
+            else if (siteName == Constants.SiteNames.Betkolik)
+            {
+                base.SetContext(betkolikContext);
             }
         }
     }
