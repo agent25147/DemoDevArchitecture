@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "DemoDevArchitecture\WebAPI\WebAPI.csproj", "{2CC97F68-2132-409E-8343-5AFE0888ED5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "DemoDevArchitecture\Tests\Tests.csproj", "{9D20300D-27D9-4447-8DDB-DDCB5432C278}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "DemoDevArchitecture\Business\Business.csproj", "{1165CB5E-7DAD-4E50-88F6-6FB5A4FE0127}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DemoDevArchitecture\DataAccess\DataAccess.csproj", "{CACDF1C8-F58C-4E98-9B47-ABA5178B7397}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "DemoDevArchitecture\Core\Core.csproj", "{5E351406-3FD3-4419-8256-2ED1AB304C51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "DemoDevArchitecture\Entities\Entities.csproj", "{08194AF2-7A7E-48DA-AD27-84EED495C005}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIPreparation", "DemoDevArchitecture\UIPreparation\UIPreparation.csproj", "{BE362DD3-8099-485E-9061-AC45E6712617}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2CC97F68-2132-409E-8343-5AFE0888ED5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CC97F68-2132-409E-8343-5AFE0888ED5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CC97F68-2132-409E-8343-5AFE0888ED5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CC97F68-2132-409E-8343-5AFE0888ED5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D20300D-27D9-4447-8DDB-DDCB5432C278}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D20300D-27D9-4447-8DDB-DDCB5432C278}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D20300D-27D9-4447-8DDB-DDCB5432C278}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D20300D-27D9-4447-8DDB-DDCB5432C278}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1165CB5E-7DAD-4E50-88F6-6FB5A4FE0127}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1165CB5E-7DAD-4E50-88F6-6FB5A4FE0127}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1165CB5E-7DAD-4E50-88F6-6FB5A4FE0127}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1165CB5E-7DAD-4E50-88F6-6FB5A4FE0127}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CACDF1C8-F58C-4E98-9B47-ABA5178B7397}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CACDF1C8-F58C-4E98-9B47-ABA5178B7397}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CACDF1C8-F58C-4E98-9B47-ABA5178B7397}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CACDF1C8-F58C-4E98-9B47-ABA5178B7397}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E351406-3FD3-4419-8256-2ED1AB304C51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E351406-3FD3-4419-8256-2ED1AB304C51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E351406-3FD3-4419-8256-2ED1AB304C51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E351406-3FD3-4419-8256-2ED1AB304C51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08194AF2-7A7E-48DA-AD27-84EED495C005}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08194AF2-7A7E-48DA-AD27-84EED495C005}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08194AF2-7A7E-48DA-AD27-84EED495C005}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08194AF2-7A7E-48DA-AD27-84EED495C005}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE362DD3-8099-485E-9061-AC45E6712617}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE362DD3-8099-485E-9061-AC45E6712617}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE362DD3-8099-485E-9061-AC45E6712617}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE362DD3-8099-485E-9061-AC45E6712617}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {53F1C2B0-B113-4C88-99D7-87727F6F9F09}
+	EndGlobalSection
+EndGlobal
