@@ -56,6 +56,8 @@ namespace Business
                 sp.GetService<IHttpContextAccessor>().HttpContext?.User ??
                 new ClaimsPrincipal(new ClaimsIdentity(Messages.Unknown));
 
+           
+
             services.AddScoped<IPrincipal>(getPrincipal);
             services.AddMemoryCache();
 
@@ -87,8 +89,7 @@ namespace Business
                     ?.GetName();
             };
 
-
-            services.AddSingleton<ISiteSelector, SiteSelector>();
+            services.AddScoped<ISiteSelector, SiteSelector>();
         }
 
         /// <summary>

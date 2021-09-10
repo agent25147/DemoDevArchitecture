@@ -1,6 +1,7 @@
 ﻿using Business.Handlers.Users.Commands;
 using Business.Handlers.Users.Queries;
 using Core.Entities.Dtos;
+using DataAccess.Services.SiteSelection.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -15,6 +16,12 @@ namespace WebAPI.Controllers
     [ApiController]
     public class UsersController : BaseApiController
     {
+       
+        public UsersController(ISiteSelector siteSelector)
+        {
+            string currentWebsite = "Ultra"; // HttpContext.Request.Headers["sitename"];
+            siteSelector.SelectedSite = currentWebsite;
+        }
         /// <summary>
         /// List Users
         /// </summary>
@@ -91,6 +98,7 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] CreateUserCommand createUser)
         {
+           
             var result = await Mediator.Send(createUser);
             if (result.Success)
             {

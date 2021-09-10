@@ -1,9 +1,9 @@
 ﻿using Core.Utilities.Results;
+using DataAccess.Services.SiteSelection.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-
 namespace WebAPI.Controllers
 {
     /// <summary>
@@ -15,12 +15,16 @@ namespace WebAPI.Controllers
     public class BaseApiController : Controller
     {
         private IMediator _mediator;
-
+       
+        public BaseApiController()
+        {
+            
+        }
         /// <summary>
         /// It is for getting the Mediator instance creation process from the base controller.
         /// </summary>
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
-
+        
         /// <summary>
         ///
         /// </summary>
