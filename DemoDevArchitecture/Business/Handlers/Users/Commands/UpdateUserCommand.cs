@@ -5,6 +5,7 @@ using Core.Aspects.Autofac.Logging;
 using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Constants;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,13 +14,15 @@ namespace Business.Handlers.Users.Commands
 {
     public class UpdateUserCommand : IRequest<IResult>
     {
-
         public int UserId { get; set; }
         public string Email { get; set; }
         public string FullName { get; set; }
         public string MobilePhones { get; set; }
         public string Address { get; set; }
         public string Notes { get; set; }
+        public bool IsSetra { get; set; }
+        public bool IsUltra { get; set; }
+        public bool IsBetkolik { get; set; }
 
         public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, IResult>
         {
@@ -29,7 +32,6 @@ namespace Business.Handlers.Users.Commands
             {
                 _userRepository = userRepository;
             }
-
 
             [SecuredOperation(Priority = 1)]
             [CacheRemoveAspect("Get")]
@@ -44,8 +46,39 @@ namespace Business.Handlers.Users.Commands
                 isThereAnyUser.Address = request.Address;
                 isThereAnyUser.Notes = request.Notes;
 
-                _userRepository.Update(isThereAnyUser);
-                await _userRepository.SaveChangesAsync();
+                if (request.IsSetra)
+                {
+                    _userRepository.UseDb(SiteNames.Setra);
+
+                    _userRepository.Update(isThereAnyUser);
+                   
+                    await _userRepository.SaveChangesAsync();
+                }
+                if (request.IsUltra)
+                {
+                    _userRepository.UseDb(SiteNames.Ultra);
+
+                    _userRepository.Update(isThereAnyUser);
+
+                    await _userRepository.SaveChangesAsync();
+                }
+                if (request.IsBetkolik)
+                {
+                    _userRepository.UseDb(SiteNames.Betkolik);
+
+                    _userRepository.Update(isThereAnyUser);
+
+                    await _userRepository.SaveChangesAsync();
+                }
+
+                // user is not admin and haven't selected any checkboxes
+                if (!request.IsSetra && !request.IsSetra && !request.IsBetkolik)
+                {
+                    _userRepository.Update(isThereAnyUser);
+                    await _userRepository.SaveChangesAsync();
+                }
+
+
                 return new SuccessResult(Messages.Updated);
             }
         }

@@ -17,11 +17,6 @@ namespace WebAPI.Controllers
     public class UsersController : BaseApiController
     {
        
-        public UsersController(ISiteSelector siteSelector)
-        {
-            string currentWebsite = "Ultra"; // HttpContext.Request.Headers["sitename"];
-            siteSelector.SelectedSite = currentWebsite;
-        }
         /// <summary>
         /// List Users
         /// </summary>
@@ -34,7 +29,7 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public async Task<IActionResult> GetList()
         {
-           
+            var x = SiteSelector; 
             var result = await Mediator.Send(new GetUsersQuery());
             if (result.Success)
             {

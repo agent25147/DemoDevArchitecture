@@ -42,7 +42,7 @@ namespace DataAccess.Services.SiteSelection
            
         }
 
-        public string SelectedSite { get; set; } = SiteNames.Setra;
+        public string SelectedSite { get; set; } = SiteNames.Setra; 
 
        
     }

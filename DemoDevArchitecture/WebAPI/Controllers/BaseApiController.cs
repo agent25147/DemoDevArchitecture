@@ -15,16 +15,28 @@ namespace WebAPI.Controllers
     public class BaseApiController : Controller
     {
         private IMediator _mediator;
-       
+        private ISiteSelector _siteSelector;
+
         public BaseApiController()
         {
-            
+          
         }
         /// <summary>
         /// It is for getting the Mediator instance creation process from the base controller.
         /// </summary>
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
         
+        protected ISiteSelector SiteSelector
+        {
+            get
+            {
+                _siteSelector ??= HttpContext.RequestServices.GetService<ISiteSelector>();
+                _siteSelector.SelectedSite = HttpContext.Request.Cookies["siteName"];
+                return _siteSelector;
+            }
+
+        }
+       
         /// <summary>
         ///
         /// </summary>

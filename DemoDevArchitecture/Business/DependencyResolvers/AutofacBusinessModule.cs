@@ -70,6 +70,7 @@ namespace Business.DependencyResolvers
                             {
                                 Selector = new AspectInterceptorSelector()
                             }).SingleInstance().InstancePerDependency();
+
         }
     }
 }

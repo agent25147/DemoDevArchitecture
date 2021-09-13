@@ -56,8 +56,6 @@ namespace Business
                 sp.GetService<IHttpContextAccessor>().HttpContext?.User ??
                 new ClaimsPrincipal(new ClaimsIdentity(Messages.Unknown));
 
-           
-
             services.AddScoped<IPrincipal>(getPrincipal);
             services.AddMemoryCache();
 

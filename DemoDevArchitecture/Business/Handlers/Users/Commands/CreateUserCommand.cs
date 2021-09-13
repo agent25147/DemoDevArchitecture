@@ -48,7 +48,7 @@ namespace Business.Handlers.Users.Commands
             }
 
             [SecuredOperation(Priority = 1)]
-            [CacheRemoveAspect("Get")]
+         //  [CacheRemoveAspect("Get")]
             [LogAspect(typeof(FileLogger))]
             public async Task<IResult> Handle(CreateUserCommand request, CancellationToken cancellationToken)
             {

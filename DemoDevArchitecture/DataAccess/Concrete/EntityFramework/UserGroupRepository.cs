@@ -16,11 +16,11 @@ namespace DataAccess.Concrete.EntityFramework
         private readonly ISiteSelector siteSelector;
 
         public UserGroupRepository(ProjectDbContext context , ISiteSelector siteSelector)
-            : base(context)
+            : base(siteSelector.GetCurrentContext())
         {
             this.siteSelector = siteSelector;
 
-            base.SetContext(siteSelector.GetCurrentContext());
+          //  base.SetContext();
         }
 
         public async Task BulkInsert(int userId, IEnumerable<UserGroup> userGroups)
